@@ -6,7 +6,7 @@ import { HiMiniFolderArrowDown } from "react-icons/hi2";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { BiSolidUpArrow } from "react-icons/bi";
 import { RiVipCrown2Fill } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronRight } from "react-icons/fa6";
 import { MdBookmarkAdded } from "react-icons/md";
 import { TfiAlarmClock } from "react-icons/tfi";
@@ -19,10 +19,33 @@ const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredHistory, setIsHoveredHistory] = useState(false);
   const [isHoveredUser, setIsHoveredUser] = useState(false);
-  const [isHoveredApp, setIsHoveredApp] = useState(true);
+  const [isHoveredApp, setIsHoveredApp] = useState(false);
   const userInfo = { name: "Vo Chi Thanh" };
+
+  //  Khi cuộn chuột
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Kiểm tra nếu cuộn chuột xuống > 300px
+      if (window.scrollY > 300) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Dọn dẹp sự kiện khi component bị unmount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
-    <div className="  h-[60px] px-12 flex justify-between bg-black text-white">
+    <div
+      className={`h-[60px] px-12 flex justify-between text-white sticky top-0 transition-all duration-1000 ${
+        isScrolled ? "bg-black" : "bg-gradient-to-b from-black to-transparent"
+      }`}
+    >
       {/* LEFT */}
       <div className=" flex items-center gap-5 h-full font-Vip  ">
         <span className="text-green-500 font-bold text-3xl cursor-pointer">
@@ -99,18 +122,19 @@ const Header = () => {
 
       <div className=" flex items-center gap-5">
         {/*  */}
-        <div className="  relative rounded-md shadow-sm">
+        <div className="  relative rounded-md shadow-sm z-10">
           <input
             type="text"
-            className="     rounded-md w-full focus:outline-none focus:ring-2 focus:ring-black text-gray-300 py-[5px] px-1 pr-14 pl-3"
+            className="rounded-md w-full focus:outline-none focus:ring-0 focus:border-none text-white placeholder-white py-[5px] px-1 pr-14 pl-3"
             style={{
               background: "rgba(255, 255, 255, 0.2)",
               whiteSpace: "nowrap",
               textOverflow: "ellipsis",
               border: "none",
             }}
-            placeholder="Giọt Mưa Mang Mùi Rỉ Sét  "
+            placeholder="Giọt Mưa Mang Mùi Rỉ Sét"
           />
+
           <div
             className="absolute top-0 right-0 flex items-center h-full text-white font-bold border-l px-3 cursor-pointer hover:text-green-500"
             style={{
@@ -312,6 +336,7 @@ const Header = () => {
           <span className="font-semibold text-base text-black  font-Vip  ">
             Vip{" "}
           </span>
+
           <div
             className="absolute right-0 px-1  bg-red-500 flex items-center justify-center"
             style={{

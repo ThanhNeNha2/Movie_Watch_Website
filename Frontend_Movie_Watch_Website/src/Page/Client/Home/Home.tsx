@@ -1,9 +1,7 @@
-import React from "react";
 import Header from "../../../Components/Header/Header";
-
 const Home = () => {
   return (
-    <div>
+    <div className="h-[2000px] bg-red-200">
       <Header />
     </div>
   );
