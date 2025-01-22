@@ -28,7 +28,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       // Kiểm tra nếu cuộn chuột xuống > 300px
-      if (window.scrollY > 300) {
+      if (window.scrollY > 100) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -42,7 +42,7 @@ const Header = () => {
   }, []);
   return (
     <div
-      className={`h-[60px] px-12 flex justify-between text-white sticky top-0 transition-all duration-1000 ${
+      className={`h-[60px] px-12 flex justify-between text-white sticky top-0 transition-all duration-1000 z-50 ${
         isScrolled ? "bg-black" : "bg-gradient-to-b from-black to-transparent"
       }`}
     >
