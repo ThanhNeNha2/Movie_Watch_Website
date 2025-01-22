@@ -54,45 +54,51 @@ const Home = () => {
     },
     {
       imgMain: ThuongNguyenDo,
-      name: "Tiên Nghịch",
+      name: "Thương Nguyên Đồ ",
       rank: [
-        "Top 1",
+        "Top 2",
         "Top Bảng Xếp Hạng",
         "CTPlay Sản Xuất ",
         "Chỉ Có Trên CTPlay",
       ],
-      evaluate: [8.8, 2025, "72/??"],
-      kindPhim: ["CN Animation", "Cổ Trang", "Huyền Huyễn", "Tiên Hiệp"], // Có ít thể loại hơn
+      evaluate: [9.6, 2023, "38/??"],
+      kindPhim: ["CN Animation", "Cổ Trang", "Huyền Huyễn", "HHKungFu"], // Có ít thể loại hơn
       description:
-        "“Tiên Nghịch” của tác giả Nhĩ Căn, kể về thiếu niên bình phàm Vương Lâm xuất thân nông thôn, mang theo nhiệt huyết, tu luyện nghịch tiên, không chỉ cầu trường sinh, mà còn muốn thoát khỏi thân phận giun dế. Hắn tin rằng đạo do người quyết định, dùng tư chất bình phàm bước vào con đường tu chân, trải qua bao phong ba bão táp, dựa vào trí tuệ sáng suốt, từng bước một bước lên đỉnh cao, dựa vào sức một người, danh chấn Tu chân giới.",
+        "“Thương Nguyên Đồ” Nói về yêu tà hoành hành ở Thương Nguyên giới, loài người chịu đủ tàn phá, nam chính Mạnh Xuyên từ nhỏ đã lập lời thề phải báo thù cho mẫu thân. Lấy đạo viện Kính Hồ làm khởi điểm, dựa vào tâm chí kiên nghị không sợ hãi và thân thủ đao pháp nhanh nhạt, trừng phạt gian ác, tiêu diệt yêu tộc, đăng đỉnh tứ đại đạo viện, nổi danh Đông Minh phủ, bái Thượng Nguyên Sơ Sơn, trở thành một Thần Ma.",
     },
     {
       imgMain: DauPha,
-      name: "Tiên Nghịch",
+      name: "Đấu Phá Thương Khung",
       rank: [
-        "Top 1",
+        "Top 3",
         "Top Bảng Xếp Hạng",
         "CTPlay Sản Xuất ",
         "Chỉ Có Trên CTPlay",
       ],
-      evaluate: [8.8, 2025, "72/??"],
-      kindPhim: ["CN Animation", "Cổ Trang", "Huyền Huyễn", "Tiên Hiệp"], // Có ít thể loại hơn
+      evaluate: [9.1, 2025, "130/??"],
+      kindPhim: ["CN Animation", "Cổ Trang", "Huyền Huyễn"], // Có ít thể loại hơn
       description:
-        "“Tiên Nghịch” của tác giả Nhĩ Căn, kể về thiếu niên bình phàm Vương Lâm xuất thân nông thôn, mang theo nhiệt huyết, tu luyện nghịch tiên, không chỉ cầu trường sinh, mà còn muốn thoát khỏi thân phận giun dế. Hắn tin rằng đạo do người quyết định, dùng tư chất bình phàm bước vào con đường tu chân, trải qua bao phong ba bão táp, dựa vào trí tuệ sáng suốt, từng bước một bước lên đỉnh cao, dựa vào sức một người, danh chấn Tu chân giới.",
+        "“Đấu Phá Thương Khung ” kể về một thế giới thuộc về Đấu Khí, không hề có ma pháp hoa tiếu diễm lệ, chỉ có đấu khí cương mãnh phồn thịnh! Đấu Phá Thương Khung cũng là nơi mà các Luyện Dược Sư, những nhà luyện đan dược giúp tăng cấp tu luyện, phục hồi sức lực, hay thậm chí cửu tử hoàn sinh vô cùng được trọng vọng bởi tư chất hiếm có của họ. Tưởng tượng thế giới đó sẽ phát triển ra sao? Mời các bạn xem Đấu Phá Thương Khung! Hệ Thống Tu Luyện: Đấu Giả, Đấu Sư, Đại Đấu Sư, Đấu Linh, Đấu Vương, Đấu Hoàng, Đấu Tông, Đấu Tôn, Đấu Thánh, Đấu Đế. Hãy Bắt Đầu Từ Tiêu Viêm – một thiên tài tu luyện trong phút chốc trở thành phế vật, từ phế vật lại từng bước khẳng định lại chính mình! Trên bước đường từng bước khẳng định lại bản thân, trở thành một cao thủ siêu hạng, cũng như một Luyện Dược Sư đỉnh cao, Tiêu Viêm được một vị tôn sư bí mật có thân phận cùng năng lực cực cao không ngừng chỉ dạy. Hãy cùng bắt đầu cuộc hành trình đó với Đấu Phá Thương Khung.",
     },
     {
       imgMain: DauLa,
-      name: "Tiên Nghịch",
+      name: "Đấu La Đại Lục ",
       rank: [
-        "Top 1",
+        "Top 4",
         "Top Bảng Xếp Hạng",
         "CTPlay Sản Xuất ",
         "Chỉ Có Trên CTPlay",
       ],
-      evaluate: [8.8, 2025, "72/??"],
-      kindPhim: ["CN Animation", "Cổ Trang", "Huyền Huyễn", "Tiên Hiệp"], // Có ít thể loại hơn
+      evaluate: [8.2, 2025, "258/258"],
+      kindPhim: [
+        "CN Animation",
+        "HHKungFu",
+        "Huyền Huyễn",
+        "Tiên Hiệp",
+        "Trùng Sinh",
+      ], // Có ít thể loại hơn
       description:
-        "“Tiên Nghịch” của tác giả Nhĩ Căn, kể về thiếu niên bình phàm Vương Lâm xuất thân nông thôn, mang theo nhiệt huyết, tu luyện nghịch tiên, không chỉ cầu trường sinh, mà còn muốn thoát khỏi thân phận giun dế. Hắn tin rằng đạo do người quyết định, dùng tư chất bình phàm bước vào con đường tu chân, trải qua bao phong ba bão táp, dựa vào trí tuệ sáng suốt, từng bước một bước lên đỉnh cao, dựa vào sức một người, danh chấn Tu chân giới.",
+        "“ Đấu La Đại Lục ” là một trong những tác phẩm đặc sắc của Đường Gia Tam Thiếu. Tác phẩm thuộc thể loại Huyễn Hiệp, mang đến cho độc giả một cái nhìn, một cảm nhận mới về thế giới hiệp khách huyền ảo. Câu chuyện với nhân vật chính, con một thợ rèn, một thợ rèn trở thành tửu quỷ, vì thê tử đã mất, sẵn sàng lôi cuốn người đọc ngay từ những chương đầu tiên.",
     },
   ];
   const handleMove = (type: string) => {
@@ -103,15 +109,15 @@ const Home = () => {
       setvaluePhim((prev) => (prev - 1 + listPhim.length) % listPhim.length); // Giảm giá trị (xoay vòng)
     }
   };
-  // useEffect(() => {
-  //   // SetInterval để tự động chuyển ảnh mỗi 6 giây
-  //   const intervalId = setInterval(() => {
-  //     setvaluePhim((prev) => (prev + 1) % listPhim.length); // Tăng giá trị (xoay vòng)
-  //   }, 5000); // 6000ms = 6s
+  useEffect(() => {
+    // SetInterval để tự động chuyển ảnh mỗi 6 giây
+    const intervalId = setInterval(() => {
+      setvaluePhim((prev) => (prev + 1) % listPhim.length); // Tăng giá trị (xoay vòng)
+    }, 5000); // 6000ms = 6s
 
-  //   // Cleanup function để dừng setInterval khi component unmount
-  //   return () => clearInterval(intervalId);
-  // }, []);
+    // Cleanup function để dừng setInterval khi component unmount
+    return () => clearInterval(intervalId);
+  }, []);
   return (
     <div className="h-auto">
       {/*  */}
@@ -140,7 +146,15 @@ const Home = () => {
           </div>
 
           {/* THONG TIN PHIM  */}
-          <div className="absolute bottom-1/4 left-24  bg-gray-500 bg-opacity-35 p-4 flex flex-col gap-2 rounded-md w-[40%]">
+          <div
+            className={`absolute ${
+              listPhim[valuePhim].name === "Đấu Phá Thương Khung"
+                ? isExpanded
+                  ? "bottom-20"
+                  : "bottom-1/4"
+                : "bottom-1/4"
+            }  left-24  bg-gray-500 bg-opacity-35 p-4 flex flex-col gap-2 rounded-md w-[40%]`}
+          >
             <span className="font-Bricolage font-medium text-[45px]   ">
               {listPhim[valuePhim].name}
             </span>
