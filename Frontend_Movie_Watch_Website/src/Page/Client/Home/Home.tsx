@@ -1,4 +1,3 @@
-import Header from "../../../Components/Header/Header";
 import TienNghich from "../../../../public/Slider/454973789_1043086304140741_634917588460075684_n.jpg";
 import TheGioHoanMy from "../../../../public/Slider/423583069_299995016419669_3530185539043776265_n.jpg";
 import ThuongNguyenDo from "../../../../public/Slider/453533518_1509423359658094_2018197872288129407_n.jpg";
@@ -13,6 +12,8 @@ import { FaPlay } from "react-icons/fa";
 import { MdBookmarkAdded } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { InfoPhim } from "../../../Util/typeApi";
+import Header from "../../../Components/Client/Header/Header";
+import Content from "../../../Components/Client/Content/Content";
 
 const Home = () => {
   const [isExpanded, setIsExpanded] = useState(false); // Quản lý trạng thái hiển thị
@@ -223,10 +224,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/*  */}
-      <div className="h-28">
-        <span>thanh </span>
-      </div>
+
+      {/* CONTENT */}
+      <Content />
     </div>
   );
 };
