@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { InfoPhim } from "../../../Util/typeApi";
 import Header from "../../../Components/Client/Header/Header";
 import Content from "../../../Components/Client/Content/Content";
+import NewMovieUpdated from "../../../Components/Client/NewMovieUpdated/NewMovieUpdated";
 
 const Home = () => {
   const [isExpanded, setIsExpanded] = useState(false); // Quản lý trạng thái hiển thị
@@ -110,15 +111,15 @@ const Home = () => {
       setvaluePhim((prev) => (prev - 1 + listPhim.length) % listPhim.length); // Giảm giá trị (xoay vòng)
     }
   };
-  useEffect(() => {
-    // SetInterval để tự động chuyển ảnh mỗi 6 giây
-    const intervalId = setInterval(() => {
-      setvaluePhim((prev) => (prev + 1) % listPhim.length); // Tăng giá trị (xoay vòng)
-    }, 5000); // 6000ms = 6s
+  // useEffect(() => {
+  //   // SetInterval để tự động chuyển ảnh mỗi 6 giây
+  //   const intervalId = setInterval(() => {
+  //     setvaluePhim((prev) => (prev + 1) % listPhim.length); // Tăng giá trị (xoay vòng)
+  //   }, 5000); // 6000ms = 6s
 
-    // Cleanup function để dừng setInterval khi component unmount
-    return () => clearInterval(intervalId);
-  }, []);
+  //   // Cleanup function để dừng setInterval khi component unmount
+  //   return () => clearInterval(intervalId);
+  // }, []);
   return (
     <div className="h-auto">
       {/*  */}
@@ -226,7 +227,10 @@ const Home = () => {
       </div>
 
       {/* CONTENT */}
-      <Content />
+      <div className="bg-gray-700 px-12 h-auto flex flex-col gap-16">
+        <Content />
+        <NewMovieUpdated />
+      </div>
     </div>
   );
 };
