@@ -2,7 +2,7 @@ import React from "react";
 import anhbia from "../../../../public/content/anhbiacontent.jpg";
 import { MdOutlineStar } from "react-icons/md";
 
-const NewMovieUpdated = () => {
+const NewMovieUpdatedSeries = () => {
   const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (
     <div className="h-auto ">
@@ -10,7 +10,7 @@ const NewMovieUpdated = () => {
         {" "}
         <span className=" font-Bricolage font-semibold text-[25px] text-white  ">
           {" "}
-          Phim Lẻ Mới Cập Nhật
+          Phim Bộ Mới Cập Nhật
         </span>
         <span className="text-white hover:text-green-400 cursor-pointer">
           Xem tất cả
@@ -109,4 +109,4 @@ const NewMovieUpdated = () => {
   );
 };
 
-export default NewMovieUpdated;
+export default NewMovieUpdatedSeries;

@@ -15,34 +15,16 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { FaList } from "react-icons/fa";
 
 import "./Header.css";
-const Header = () => {
+const Header = ({ isScrolled }: any) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredHistory, setIsHoveredHistory] = useState(false);
   const [isHoveredUser, setIsHoveredUser] = useState(false);
   const [isHoveredApp, setIsHoveredApp] = useState(false);
   const userInfo = { name: "Vo Chi Thanh" };
 
-  //  Khi cuộn chuột
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Kiểm tra nếu cuộn chuột xuống > 300px
-      if (window.scrollY > 100) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Dọn dẹp sự kiện khi component bị unmount
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
   return (
     <div
-      className={`h-[60px] px-12 flex justify-between text-white sticky top-0 transition-all duration-1000 z-50 ${
+      className={`h-[60px] px-12 flex justify-between text-white sticky top-0 transition-all duration-1000 z-[99] ${
         isScrolled ? "bg-black" : "bg-gradient-to-b from-black to-transparent"
       }`}
     >

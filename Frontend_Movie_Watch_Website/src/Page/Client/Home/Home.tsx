@@ -15,6 +15,8 @@ import { InfoPhim } from "../../../Util/typeApi";
 import Header from "../../../Components/Client/Header/Header";
 import Content from "../../../Components/Client/Content/Content";
 import NewMovieUpdated from "../../../Components/Client/NewMovieUpdated/NewMovieUpdated";
+import Flooter from "../../../Components/Client/Flooter/Flooter";
+import NewMovieUpdatedSeries from "../../../Components/Client/NewMovieUpdatedSeries/NewMovieUpdatedSeries";
 
 const Home = () => {
   const [isExpanded, setIsExpanded] = useState(false); // Quản lý trạng thái hiển thị
@@ -120,19 +122,40 @@ const Home = () => {
   //   // Cleanup function để dừng setInterval khi component unmount
   //   return () => clearInterval(intervalId);
   // }, []);
+
+  //  Khi cuộn chuột
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Kiểm tra nếu cuộn chuột xuống > 300px
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Dọn dẹp sự kiện khi component bị unmount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <div className="h-auto">
       {/*  */}
+      {isScrolled && <Header isScrolled={isScrolled} />}
+
       <div
         className="h-[951px] transition-all duration-1000 ease-in-out"
         style={{
           backgroundImage: `url(${listPhim[valuePhim].imgMain})`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+
           backgroundAttachment: "fixed", // Cố định ảnh nền khi cuộn
         }}
       >
-        <Header />
+        {!isScrolled && <Header isScrolled={isScrolled} />}
         <div className="relative flex justify-between items-center h-screen px-4 text-white ">
           <div
             className="bg-gray-500 p-3 rounded-full cursor-pointer"
@@ -225,12 +248,13 @@ const Home = () => {
           </div>
         </div>
       </div>
-
       {/* CONTENT */}
-      <div className="bg-gray-700 px-12 h-auto flex flex-col gap-16">
+      <div className="bg-gray-700 px-12 h-auto flex flex-col gap-5">
         <Content />
         <NewMovieUpdated />
+        <NewMovieUpdatedSeries />
       </div>
+      <Flooter />
     </div>
   );
 };
