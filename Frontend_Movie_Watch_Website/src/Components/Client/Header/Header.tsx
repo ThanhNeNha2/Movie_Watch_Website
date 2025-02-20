@@ -15,17 +15,23 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { FaList } from "react-icons/fa";
 
 import "./Header.css";
+import { useLocation } from "react-router-dom";
 const Header = ({ isScrolled }: any) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredHistory, setIsHoveredHistory] = useState(false);
   const [isHoveredUser, setIsHoveredUser] = useState(false);
   const [isHoveredApp, setIsHoveredApp] = useState(false);
   const userInfo = { name: "Vo Chi Thanh" };
+  const location = useLocation();
 
   return (
     <div
       className={`h-[60px] px-12 flex justify-between text-white sticky top-0 transition-all duration-1000 z-[99] ${
-        isScrolled ? "bg-black" : "bg-gradient-to-b from-black to-transparent"
+        location.pathname === "/"
+          ? isScrolled
+            ? "bg-black"
+            : "bg-gradient-to-b from-black to-transparent"
+          : "bg-black"
       }`}
     >
       {/* LEFT */}

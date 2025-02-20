@@ -90,7 +90,7 @@ const Content = () => {
           <select
             name="sort"
             id="sort"
-            className="py-[6px] px-2 rounded bg-gray-500 text-white border "
+            className="py-[6px] px-2 rounded bg-gray-500 text-white border"
           >
             <option value="post_time">Toàn bộ thể loại</option>
             <option value="update_time">Hành Động</option>

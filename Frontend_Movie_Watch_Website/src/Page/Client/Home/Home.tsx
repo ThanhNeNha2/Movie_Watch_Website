@@ -151,7 +151,6 @@ const Home = () => {
         style={{
           backgroundImage: `url(${listPhim[valuePhim].imgMain})`,
           backgroundSize: "cover",
-
           backgroundAttachment: "fixed", // Cố định ảnh nền khi cuộn
         }}
       >
