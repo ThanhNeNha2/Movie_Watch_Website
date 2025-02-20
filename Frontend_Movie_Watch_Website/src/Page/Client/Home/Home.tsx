@@ -241,7 +241,7 @@ const Home = () => {
               </div>
               <div className=" h-12 w-12 bg-gray-300 rounded-full flex justify-center items-center text-center  text-xl text-black cursor-pointer hover:bg-gray-500 hover:text-gray-200">
                 {" "}
-                <MdBookmarkAdded />{" "}
+                <MdBookmarkAdded />
               </div>
             </div>
           </div>
