@@ -5,6 +5,8 @@ import Hls from "hls.js";
 import { FiShare } from "react-icons/fi";
 import { MdBookmarkAdded, MdLiveTv } from "react-icons/md";
 import { BiDownload } from "react-icons/bi";
+import { FaListUl } from "react-icons/fa6";
+import { FaPhotoVideo } from "react-icons/fa";
 const Play = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -33,7 +35,10 @@ const Play = () => {
           <div className="flex-[4]  flex flex-col  ">
             <div className="bg-black h-[503px] overflow-hidden">
               {/* <video ref={videoRef} controls className="w-full h-full"></video> */}
-              h
+              <video
+                src="https://cdn.pixabay.com/video/2021/08/10/84574-586228759_large.mp4"
+                controls
+              ></video>
             </div>
             <div
               className="h-[50px] text-white px-10 flex justify-between"
@@ -78,7 +83,7 @@ const Play = () => {
           </div>
           {/* PHAI */}
           <div
-            className="flex-[1.2] px-4 py-5 text-white"
+            className="flex-[1.2] flex flex-col px-4 py-5 gap-3 text-white"
             style={{ background: "rgb(26, 28, 34)" }}
           >
             {/*  */}
@@ -88,19 +93,34 @@ const Play = () => {
               </span>
             </div>
             {/*  */}
-            <div>
-              <span>Danh sách tập</span>
-              <span>Nội dung đặc sắc </span>
+            <div className="flex justify-between">
+              <button className="flex items-center justify-center py-2 rounded-l gap-2  flex-1 bg-gray-700 px-2 hover:text-green-400">
+                {" "}
+                <FaPhotoVideo /> Chọn tập
+              </button>
+              <button className="flex items-center justify-center py-2 rou gap-2 rounded-r flex-1 bg-gray-800 px-2 hover:text-green-400 ">
+                {" "}
+                Nội dung đặc sắc
+              </button>
             </div>
             {/*  */}
-            <div>
-              <ul className="flex flex-wrap gap-4 pt-10 pb-5 mb-7">
-                <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-                  1
-                </li>
-                <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-                  2
-                </li>
+            <div className="flex justify-between items-center text-xl ">
+              <span className="text-sm hover:text-white">Chọn tập 1-36 </span>
+              <div className="hover:text-green-400 cursor-pointer">
+                <FaListUl />
+              </div>
+            </div>
+            {/*  */}
+            <div className="  overflow-y-auto   border-gray-700   custom-scrollbar ">
+              <ul className="flex flex-wrap gap-3 justify-center pb-5 mb-7">
+                {Array.from({ length: 45 }, (_, index) => (
+                  <li
+                    key={index}
+                    className="w-10 h-10 flex justify-center items-center text-lg bg-gray-600 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer"
+                  >
+                    {index + 1}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
