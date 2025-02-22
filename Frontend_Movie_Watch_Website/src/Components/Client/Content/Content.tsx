@@ -3,53 +3,11 @@ import anhbia from "../../../../public/content/anhbiacontent.jpg";
 import { FaPlay } from "react-icons/fa";
 import { MdBookmarkAdded } from "react-icons/md";
 import { Link } from "react-router-dom";
-
+import { arrContent } from "../../../Util/apiFake";
 const Content = () => {
-  const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (
     <div className="h-auto ">
-      {/* <ul className="flex flex-wrap gap-4 pt-10 pb-5 mb-7">
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Tất cả phim{" "}
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Trung Quốc{" "}
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Hàn Quốc{" "}
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Nhật Bản{" "}
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Thái Lan{" "}
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Mỹ{" "}
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Đài Loan
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Hồng Kông{" "}
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Ấn Độ{" "}
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Anh
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Pháp
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          Việt nam
-        </li>
-        <li className="py-2 px-3 bg-gray-500 font-Bricolage font-medium text-white hover:text-green-400 cursor-pointer">
-          .....
-        </li>
-      </ul> */}
-      <div className="flex justify-center items-center gap-5 bg-gray-600 h-[60px] mt-7 mb-5 rounded">
+      <div className="flex justify-center items-center gap-5 bg-gray-800 h-[60px] mt-7 mb-5 rounded">
         <span className="text-white font-Bricolage font-medium text-xl">
           Lọc Phim
         </span>
@@ -58,7 +16,7 @@ const Content = () => {
           <select
             name="sort"
             id="sort"
-            className="py-[6px] px-2 rounded bg-gray-500 text-white border "
+            className="py-[6px] px-2 rounded bg-gray-700 text-white border "
           >
             <option value="update_time">Thời gian cập nhật</option>
             <option value="post_time">Thời gian đăng</option>
@@ -70,7 +28,7 @@ const Content = () => {
           <select
             name="sort"
             id="sort"
-            className="py-[6px] px-2 rounded bg-gray-500 text-white border "
+            className="py-[6px] px-2 rounded bg-gray-700 text-white border "
           >
             <option value="post_time">Phim Mới </option>
             <option value="update_time">Phim Bộ </option>
@@ -91,7 +49,7 @@ const Content = () => {
           <select
             name="sort"
             id="sort"
-            className="py-[6px] px-2 rounded bg-gray-500 text-white border"
+            className="py-[6px] px-2 rounded bg-gray-700 text-white border"
           >
             <option value="post_time">Toàn bộ thể loại</option>
             <option value="update_time">Hành Động</option>
@@ -123,7 +81,7 @@ const Content = () => {
           <select
             name="sort"
             id="sort"
-            className="py-[6px] px-2 rounded bg-gray-500 text-white border "
+            className="py-[6px] px-2 rounded bg-gray-700 text-white border "
           >
             <option value="update_time">Toàn bộ Quốc gia</option>
             <option value="post_time">Trung Quốc </option>
@@ -168,7 +126,7 @@ const Content = () => {
           <select
             name="sort"
             id="sort"
-            className="py-[6px] px-2 rounded bg-gray-500 text-white border "
+            className="py-[6px] px-2 rounded bg-gray-700 text-white border "
           >
             <option value="update_time">Toàn bộ Năm </option>
             <option value="production_year">2025</option>
@@ -215,8 +173,11 @@ const Content = () => {
         </span>
       </div>
       <div className="flex flex-wrap justify-between  mt-5  ">
-        {arr.map(() => (
-          <div className="relative group w-[calc(100%/6-12px)] overflow-visible cursor-pointer mb-10">
+        {arrContent.map((item, i) => (
+          <div
+            key={i}
+            className="relative group w-[calc(100%/6-12px)] overflow-visible cursor-pointer mb-10 rounded"
+          >
             <Link to={"/detailmovies"} className="block h-full">
               {/* Thumbnail */}
               <div className="h-[281px] rounded-md relative">
@@ -224,15 +185,15 @@ const Content = () => {
                   <span className="font-Vip text-white">Free</span>
                 </div>
                 <img
-                  src={anhbia}
+                  src={item.thumb_url}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded"
                 />
               </div>
 
               {/* Tên phim */}
               <span className="text-white group-hover:text-green-400">
-                Tiên Nghịch
+                {item.name}
               </span>
 
               {/* Nội dung hiển thị khi hover */}
@@ -245,7 +206,7 @@ const Content = () => {
                       <span className="font-Vip text-white">Free</span>
                     </div>
                     <img
-                      src={anhbia}
+                      src={item.poster_url}
                       alt=""
                       className="w-full h-full object-cover "
                     />
@@ -255,19 +216,21 @@ const Content = () => {
                   <div className="flex-[3] bg-gray-600 px-3 py-2 flex flex-col justify-between gap-1">
                     <div className="flex  ">
                       <span className="font-Vip text-white text-lg hover:text-green-400 w-full">
-                        Tiên Nghịch
+                        {item.name}
                       </span>
                     </div>
                     <div className="flex gap-2 items-center   ">
                       <div className="flex items-center text-green-400 ">
                         {" "}
                         <MdOutlineStar />{" "}
-                        <span className="text-green-400">9.4</span>
+                        <span className="text-green-400">
+                          {item.movie.tmdb.vote_average}
+                        </span>
                       </div>
                       <div className="border h-3"></div>
-                      <span className="text-white text-sm">T13</span>
+                      <span className="text-white text-sm">{item.time}</span>
                       <div className="border h-3"></div>
-                      <span className="text-white text-sm">2021</span>
+                      <span className="text-white text-sm">{item.year}</span>
                     </div>
                     <div>
                       <ul className="flex gap-3 items-center">
@@ -284,14 +247,7 @@ const Content = () => {
                     </div>
                     <div className="">
                       <span className="text-white text-xs  overflow-hidden line-clamp-6">
-                        “Tiên Nghịch” của tác giả Nhĩ Căn, kể về thiếu niên bình
-                        phàm Vương Lâm xuất thân nông thôn, mang theo nhiệt
-                        huyết, tu luyện nghịch tiên, không chỉ cầu trường sinh,
-                        mà còn muốn thoát khỏi thân phận giun dế. Hắn tin rằng
-                        đạo do người quyết định, dùng tư chất bình phàm bước vào
-                        con đường tu chân, trải qua bao phong ba bão táp, dựa
-                        vào trí tuệ sáng suốt, từng bước một bước lên đỉnh cao,
-                        dựa vào sức một người, danh chấn Tu chân giới.{" "}
+                        {item.content}
                       </span>
                     </div>
                     <div className="">
