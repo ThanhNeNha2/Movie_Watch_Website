@@ -2,7 +2,7 @@ import React from "react";
 
 const Flooter = () => {
   return (
-    <div className="flex bg-gray-800 justify-center  gap-32 pt-7 pb-4">
+    <div className="flex bg-black justify-center  gap-32 pt-7 pb-4">
       {/* * */}
       <div className="flex flex-col gap-2 group text-white">
         <span className="text-base">About iQIYI</span>

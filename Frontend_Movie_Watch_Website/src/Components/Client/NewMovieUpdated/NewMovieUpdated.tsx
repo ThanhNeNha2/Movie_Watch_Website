@@ -1,5 +1,7 @@
 import React from "react";
-import anhbia from "../../../../public/content/anhbiacontent.jpg";
+import anhbia from "../../../../public/content/anime1.jpg";
+import anhbia2 from "../../../../public/content/anime3.jpg";
+
 import { MdOutlineStar } from "react-icons/md";
 
 const NewMovieUpdated = () => {
@@ -24,7 +26,11 @@ const NewMovieUpdated = () => {
               <div className="absolute bg-green-400 right-0 px-3 overflow-hidden rounded">
                 <span className="font-Vip text-white">Free</span>
               </div>
-              <img src={anhbia} alt="" className="w-full h-full object-cover" />
+              <img
+                src={anhbia2}
+                alt=""
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* Tên phim */}
@@ -44,7 +50,7 @@ const NewMovieUpdated = () => {
                   <img
                     src={anhbia}
                     alt=""
-                    className="w-full h-full object-cover "
+                    className="w-full h-full object-cover"
                   />
                 </div>
 

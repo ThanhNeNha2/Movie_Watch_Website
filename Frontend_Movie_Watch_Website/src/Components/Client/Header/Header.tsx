@@ -15,7 +15,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { FaList } from "react-icons/fa";
 
 import "./Header.css";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const Header = ({ isScrolled }: any) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredHistory, setIsHoveredHistory] = useState(false);
@@ -36,9 +36,11 @@ const Header = ({ isScrolled }: any) => {
     >
       {/* LEFT */}
       <div className=" flex items-center gap-5 h-full font-Vip  ">
-        <span className="text-green-500 font-bold text-3xl cursor-pointer">
-          CTPlay
-        </span>
+        <Link to={"/"}>
+          <span className="text-green-500 font-bold text-3xl cursor-pointer">
+            CTPlay
+          </span>
+        </Link>
         <span className="font-semibold text-base cursor-pointer hover:text-green-500">
           Đề xuất{" "}
         </span>

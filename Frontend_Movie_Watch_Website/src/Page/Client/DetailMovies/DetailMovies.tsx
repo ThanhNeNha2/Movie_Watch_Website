@@ -10,6 +10,7 @@ import {
   MdOutlineStar,
 } from "react-icons/md";
 import { RiArrowDownBoxLine, RiVipCrown2Fill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const DetailMovies = () => {
   const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -96,9 +97,11 @@ const DetailMovies = () => {
 
             {/*  */}
             <div className="flex gap-3">
-              <button className="py-1 px-4 bg-green-500 font-Vip  text-lg text-white hover:text-green-400 cursor-pointer flex items-center gap-2 rounded">
-                <FaPlay /> Play
-              </button>
+              <Link to={"/play"}>
+                <button className="py-1 px-4 bg-green-500 font-Vip  text-lg text-white hover:bg-green-400 cursor-pointer flex items-center gap-2 rounded">
+                  <FaPlay /> Play
+                </button>
+              </Link>
               <button className="py-1 px-4 bg-gray-700 font-Vip  text-lg text-white hover:text-green-400 cursor-pointer flex items-center gap-2 rounded">
                 <MdOutlineIosShare /> Share
               </button>
