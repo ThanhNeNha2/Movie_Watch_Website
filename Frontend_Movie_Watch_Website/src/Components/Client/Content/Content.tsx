@@ -1,7 +1,5 @@
 import { MdOutlineStar } from "react-icons/md";
-import anhbia from "../../../../public/content/anhbiacontent.jpg";
-import { FaPlay } from "react-icons/fa";
-import { MdBookmarkAdded } from "react-icons/md";
+
 import { Link } from "react-router-dom";
 import { arrContent } from "../../../Util/apiFake";
 const Content = () => {
