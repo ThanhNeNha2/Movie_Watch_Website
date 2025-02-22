@@ -17,6 +17,7 @@ import Content from "../../../Components/Client/Content/Content";
 import NewMovieUpdated from "../../../Components/Client/NewMovieUpdated/NewMovieUpdated";
 import Flooter from "../../../Components/Client/Flooter/Flooter";
 import NewMovieUpdatedSeries from "../../../Components/Client/NewMovieUpdatedSeries/NewMovieUpdatedSeries";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [isExpanded, setIsExpanded] = useState(false); // Quản lý trạng thái hiển thị
@@ -113,15 +114,15 @@ const Home = () => {
       setvaluePhim((prev) => (prev - 1 + listPhim.length) % listPhim.length); // Giảm giá trị (xoay vòng)
     }
   };
-  // useEffect(() => {
-  //   // SetInterval để tự động chuyển ảnh mỗi 6 giây
-  //   const intervalId = setInterval(() => {
-  //     setvaluePhim((prev) => (prev + 1) % listPhim.length); // Tăng giá trị (xoay vòng)
-  //   }, 5000); // 6000ms = 6s
+  useEffect(() => {
+    // SetInterval để tự động chuyển ảnh mỗi 6 giây
+    const intervalId = setInterval(() => {
+      setvaluePhim((prev) => (prev + 1) % listPhim.length); // Tăng giá trị (xoay vòng)
+    }, 5000); // 6000ms = 6s
 
-  //   // Cleanup function để dừng setInterval khi component unmount
-  //   return () => clearInterval(intervalId);
-  // }, []);
+    // Cleanup function để dừng setInterval khi component unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   //  Khi cuộn chuột
   const [isScrolled, setIsScrolled] = useState(false);
@@ -235,20 +236,22 @@ const Home = () => {
               </button>
             </div>
             <div className="flex gap-2 items-center h-14 overflow-hidden">
-              <div className="h-12 w-12 bg-green-500 rounded-full flex justify-center items-center text-center text-lg cursor-pointer hover:bg-green-400">
-                {" "}
-                <FaPlay />{" "}
-              </div>
+              <Link to={"/play"}>
+                <div className="h-12 w-12 bg-green-500 rounded-full flex justify-center items-center text-center text-lg cursor-pointer hover:bg-green-400">
+                  {" "}
+                  <FaPlay />{" "}
+                </div>
+              </Link>
               <div className=" h-12 w-12 bg-gray-300 rounded-full flex justify-center items-center text-center  text-xl text-black cursor-pointer hover:bg-gray-500 hover:text-gray-200">
                 {" "}
-                <MdBookmarkAdded />{" "}
+                <MdBookmarkAdded />
               </div>
             </div>
           </div>
         </div>
       </div>
       {/* CONTENT */}
-      <div className="bg-gray-700 px-12 h-auto flex flex-col gap-5">
+      <div className="bg-gray-900 px-12 h-auto flex flex-col gap-5">
         <Content />
         <NewMovieUpdated />
         <NewMovieUpdatedSeries />
