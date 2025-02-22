@@ -1,6 +1,14 @@
 import TienNghich from "../../../../public/Slider/454973789_1043086304140741_634917588460075684_n.jpg";
-import comay from "../../../../public/play/a_100605781_m_601_vi_m1_260_360.webp";
-import olieu from "../../../../public/play/2.webp";
+import daupha from "../../../../public/content/3d/daupha.jpg";
+import thuongnguyen from "../../../../public/content/3d/thuongnguyen.jpg";
+import thegioi from "../../../../public/content/3d/thegioi.jpg";
+import daula from "../../../../public/content/3d/daula.jpg";
+import thanan from "../../../../public/content/3d/thanan.jpg";
+import goju from "../../../../public/content/anime/goju.jpg";
+import Killua from "../../../../public/content/anime/Killua.jpg";
+import failtai from "../../../../public/content/anime/failtai.jpg";
+import naruto from "../../../../public/content/anime/naruto.jpg";
+import tanjiro from "../../../../public/content/anime/tanjiro.jpg";
 
 import { useState } from "react";
 import Header from "../../../Components/Client/Header/Header";
@@ -14,8 +22,20 @@ import { FaPhotoVideo } from "react-icons/fa";
 import { LiaThListSolid } from "react-icons/lia";
 const Play = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(1); // Bắt đầu với null để không chọn item nào
 
+  const items = [
+    { id: 1, title: "Hội Thuật Sư", img: failtai },
+    { id: 2, title: "Thanh Gươm Diệt Qủy", img: tanjiro },
+    { id: 3, title: "Đấu Phá Thương Khung", img: daupha },
+    { id: 4, title: "Thương Nguyên Đồ ", img: thuongnguyen },
+    { id: 5, title: "Thế Giới Hoàn Mỹ ", img: thegioi },
+    { id: 6, title: "Đấu La Đại Lục", img: daula },
+    { id: 7, title: "Thần Ấn Vương Tọa", img: thanan },
+    { id: 8, title: "Naruto", img: naruto },
+    { id: 9, title: "Chú Thuật Sư", img: goju },
+    { id: 10, title: "Hunter x Hunter", img: Killua },
+  ];
   // Sử lý video
   const videoUrl =
     "https://vip.opstream12.com/20240924/23748_d8bc5c8d/index.m3u8";
@@ -351,68 +371,34 @@ const Play = () => {
               </span>
             </div>
             <div className="flex flex-col">
-              {/* Item 1 */}
-              <div
-                className={`flex flex-col gap-2 px-3 py-3 rounded transition ${
-                  active === 1 ? "bg-gray-800" : "bg-transparent"
-                }`}
-                onMouseEnter={() => setActive(1)}
-              >
-                <div className="flex gap-3 font-Bricolage">
-                  <span className="text-green-400 font-bold">1</span>
-                  <span>{"<Thuyết Minh> Tiên Đài có Cây"}</span>
-                </div>
-                {active === 1 && (
-                  <div className="pl-10">
-                    <img
-                      src={comay}
-                      alt=""
-                      className="w-[100px] h-[150px] object-cover"
-                    />
+              <div onMouseLeave={() => setActive(1)}>
+                {" "}
+                {/* Reset khi rời khỏi danh sách */}
+                {items.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`flex flex-col gap-2 px-3 py-3 rounded transition ${
+                      active === item.id ? "bg-gray-800" : "bg-transparent"
+                    }`}
+                    onMouseEnter={() => setActive(item.id)} // Khi hover vào, set trạng thái active
+                  >
+                    <div className="flex gap-3 font-Bricolage">
+                      <span className="text-green-400 font-bold">
+                        {item.id}
+                      </span>
+                      <span>{item.title}</span>
+                    </div>
+                    {active === item.id && (
+                      <div className="pl-10">
+                        <img
+                          src={item.img}
+                          alt=""
+                          className="w-[100px] h-[150px] object-cover"
+                        />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-              {/* Item 2 */}
-              <div
-                className={`flex flex-col gap-2 px-3 py-3 rounded transition ${
-                  active === 2 ? "bg-gray-800" : "bg-transparent"
-                }`}
-                onMouseEnter={() => setActive(2)}
-              >
-                <div className="flex gap-3 font-Bricolage">
-                  <span className="text-green-400 font-bold">2</span>
-                  <span>Cây Ô Liêu Màu Trắng </span>
-                </div>
-                {active === 2 && (
-                  <div className="pl-10">
-                    <img
-                      src={olieu}
-                      alt=""
-                      className="w-[100px] h-[150px] object-cover"
-                    />
-                  </div>
-                )}
-              </div>
-              {/* Item 3 */}
-              <div
-                className={`flex flex-col gap-2 px-3 py-3 rounded transition ${
-                  active === 2 ? "bg-gray-800" : "bg-transparent"
-                }`}
-                onMouseEnter={() => setActive(3)}
-              >
-                <div className="flex gap-3 font-Bricolage">
-                  <span className="text-green-400 font-bold">2</span>
-                  <span>Cây Ô Liêu Màu Trắng </span>
-                </div>
-                {active === 2 && (
-                  <div className="pl-10">
-                    <img
-                      src={olieu}
-                      alt=""
-                      className="w-[100px] h-[150px] object-cover"
-                    />
-                  </div>
-                )}
+                ))}
               </div>
             </div>
           </div>
