@@ -372,7 +372,6 @@ const Play = () => {
                   </div>
                 )}
               </div>
-
               {/* Item 2 */}
               <div
                 className={`flex flex-col gap-2 px-3 py-3 rounded transition ${
@@ -382,7 +381,28 @@ const Play = () => {
               >
                 <div className="flex gap-3 font-Bricolage">
                   <span className="text-green-400 font-bold">2</span>
-                  <span>{"<Thuyết Minh> Tiên Đài có Cây"}</span>
+                  <span>Cây Ô Liêu Màu Trắng </span>
+                </div>
+                {active === 2 && (
+                  <div className="pl-10">
+                    <img
+                      src={olieu}
+                      alt=""
+                      className="w-[100px] h-[150px] object-cover"
+                    />
+                  </div>
+                )}
+              </div>
+              {/* Item 3 */}
+              <div
+                className={`flex flex-col gap-2 px-3 py-3 rounded transition ${
+                  active === 2 ? "bg-gray-800" : "bg-transparent"
+                }`}
+                onMouseEnter={() => setActive(3)}
+              >
+                <div className="flex gap-3 font-Bricolage">
+                  <span className="text-green-400 font-bold">2</span>
+                  <span>Cây Ô Liêu Màu Trắng </span>
                 </div>
                 {active === 2 && (
                   <div className="pl-10">
