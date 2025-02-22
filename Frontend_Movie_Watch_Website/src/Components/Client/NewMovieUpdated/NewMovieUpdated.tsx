@@ -1,9 +1,8 @@
 import React from "react";
 import anhbia from "../../../../public/content/anime1.jpg";
 import anhbia2 from "../../../../public/content/anime3.jpg";
-
 import { MdOutlineStar } from "react-icons/md";
-
+import { arrNewMovieUpdated } from "../../../Util/apiFake";
 const NewMovieUpdated = () => {
   const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (
@@ -19,15 +18,18 @@ const NewMovieUpdated = () => {
         </span>
       </div>
       <div className="flex flex-wrap justify-between  mt-5  ">
-        {arr.map(() => (
-          <div className="relative group w-[calc(100%/6-12px)] overflow-visible cursor-pointer mb-10">
+        {arrNewMovieUpdated.map((item, i) => (
+          <div
+            key={i}
+            className="relative group w-[calc(100%/6-12px)] overflow-visible cursor-pointer mb-10"
+          >
             {/* Thumbnail */}
             <div className="h-[281px] rounded-md relative">
               <div className="absolute bg-green-400 right-0 px-3 overflow-hidden rounded">
                 <span className="font-Vip text-white">Free</span>
               </div>
               <img
-                src={anhbia2}
+                src={item.thumb_url}
                 alt=""
                 className="w-full h-full object-cover"
               />
@@ -35,7 +37,7 @@ const NewMovieUpdated = () => {
 
             {/* Tên phim */}
             <span className="text-white group-hover:text-green-400">
-              Tiên Nghịch
+              {item.name}
             </span>
 
             {/* Nội dung hiển thị khi hover */}
@@ -48,7 +50,7 @@ const NewMovieUpdated = () => {
                     <span className="font-Vip text-white">Free</span>
                   </div>
                   <img
-                    src={anhbia}
+                    src={item.poster_url}
                     alt=""
                     className="w-full h-full object-cover"
                   />
@@ -58,19 +60,21 @@ const NewMovieUpdated = () => {
                 <div className="flex-[3] bg-gray-600 px-3 py-2 flex flex-col justify-between gap-1">
                   <div className="flex  ">
                     <span className="font-Vip text-white text-lg hover:text-green-400 w-full">
-                      Tiên Nghịch
+                      {item.name}
                     </span>
                   </div>
                   <div className="flex gap-2 items-center   ">
                     <div className="flex items-center text-green-400 ">
                       {" "}
                       <MdOutlineStar />{" "}
-                      <span className="text-green-400">9.4</span>
+                      <span className="text-green-400">
+                        {item.movie.tmdb.vote_average}
+                      </span>
                     </div>
                     <div className="border h-3"></div>
-                    <span className="text-white text-sm">T13</span>
+                    <span className="text-white text-sm">{item.time}</span>
                     <div className="border h-3"></div>
-                    <span className="text-white text-sm">2021</span>
+                    <span className="text-white text-sm">{item.year}</span>
                   </div>
                   <div>
                     <ul className="flex gap-3 items-center">
@@ -87,14 +91,7 @@ const NewMovieUpdated = () => {
                   </div>
                   <div className="">
                     <span className="text-white text-xs  overflow-hidden line-clamp-6">
-                      “Tiên Nghịch” của tác giả Nhĩ Căn, kể về thiếu niên bình
-                      phàm Vương Lâm xuất thân nông thôn, mang theo nhiệt huyết,
-                      tu luyện nghịch tiên, không chỉ cầu trường sinh, mà còn
-                      muốn thoát khỏi thân phận giun dế. Hắn tin rằng đạo do
-                      người quyết định, dùng tư chất bình phàm bước vào con
-                      đường tu chân, trải qua bao phong ba bão táp, dựa vào trí
-                      tuệ sáng suốt, từng bước một bước lên đỉnh cao, dựa vào
-                      sức một người, danh chấn Tu chân giới.{" "}
+                      {item.content}
                     </span>
                   </div>
                   <div className="">
