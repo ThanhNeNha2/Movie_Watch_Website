@@ -1,38 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { MdOutlineStar, MdSearch, MdFilterList, MdClear } from "react-icons/md";
-import { Link, useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-
-// Định nghĩa interface cho dữ liệu phim
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-interface Tmdb {
-  vote_average?: number;
-}
-
-interface Imdb {
-  vote_average?: number;
-}
-
-interface Movie {
-  _id: string;
-  name: string;
-  slug: string;
-  thumb_url: string;
-  poster_url: string;
-  sub_docquyen: boolean;
-  time: string;
-  year: number;
-  category: Category[];
-  tmdb?: Tmdb;
-  imdb?: Imdb;
-  description?: string;
-}
+import { MdSearch, MdFilterList, MdClear } from "react-icons/md";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 interface Filters {
   page: number;
@@ -40,10 +8,12 @@ interface Filters {
   filterCategory: string;
   filterCountry: string;
   filterYear: string;
+  filterType: string; // Added filterType for movie type
 }
 
 const Search: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [isFilterExpanded, setIsFilterExpanded] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filters>({
     page: parseInt(searchParams.get("page") || "1") || 1,
@@ -51,80 +21,77 @@ const Search: React.FC = () => {
     filterCategory: searchParams.get("category") || "",
     filterCountry: searchParams.get("country") || "",
     filterYear: searchParams.get("year") || "",
+    filterType: searchParams.get("type") || "", // Initialize filterType from URL
   });
 
   useEffect(() => {
+    // Sync filters with URL query parameters
     setFilters({
       page: parseInt(searchParams.get("page") || "1") || 1,
       sortField: searchParams.get("sort_field") || "",
       filterCategory: searchParams.get("category") || "",
       filterCountry: searchParams.get("country") || "",
       filterYear: searchParams.get("year") || "",
+      filterType: searchParams.get("type") || "",
     });
   }, [searchParams]);
-
-  const fetchMovies = async (): Promise<Movie[]> => {
-    const response = await axios.get(
-      "https://ophim1.com/v1/api/danh-sach/hoat-hinh",
-      {
-        params: {
-          page: filters.page,
-          sort_field: filters.sortField,
-          filterCategory: filters.filterCategory
-            ? [filters.filterCategory]
-            : [],
-          filterCountry: filters.filterCountry ? [filters.filterCountry] : [],
-          filterYear: filters.filterYear,
-        },
-      }
-    );
-    return response.data.data.items;
-  };
-
-  const {
-    data: movies,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["movies", filters],
-    queryFn: fetchMovies,
-  });
 
   const handleFilterChange = (
     e: React.ChangeEvent<HTMLSelectElement>
   ): void => {
     const { name, value } = e.target;
-    setFilters((prev) => ({
-      ...prev,
+    const newFilters = {
+      ...filters,
       [name]: value,
-      page: 1,
-    }));
+      page: 1, // Reset to page 1 when changing filters
+    };
+    setFilters(newFilters);
+
+    // Update URL query parameters without reloading
+    const queryParams = new URLSearchParams({
+      page: newFilters.page.toString(),
+      sort_field: newFilters.sortField,
+      category: newFilters.filterCategory,
+      country: newFilters.filterCountry,
+      year: newFilters.filterYear,
+      type: newFilters.filterType, // Include filterType in query
+    }).toString();
+    setSearchParams(queryParams, { replace: true }); // Update URL without reload
   };
 
   const handleSearch = (): void => {
+    // Navigate to /ListMoveSearch with query parameters
     const queryParams = new URLSearchParams({
       page: filters.page.toString(),
       sort_field: filters.sortField,
       category: filters.filterCategory,
       country: filters.filterCountry,
       year: filters.filterYear,
+      type: filters.filterType, // Include filterType in navigation
     }).toString();
-    setSearchParams(queryParams, { replace: true });
-    window.history.pushState(
-      null,
-      "",
-      `http://localhost:5173/danh-sach/hoat-hinh?${queryParams}`
-    );
+    navigate(`/ListMoveSearch?${queryParams}`); // Navigate to new route
   };
 
   const clearFilters = (): void => {
-    setFilters({
+    const newFilters = {
       page: 1,
       sortField: "",
       filterCategory: "",
       filterCountry: "",
       filterYear: "",
-    });
+      filterType: "", // Reset filterType
+    };
+    setFilters(newFilters);
+    // Update URL query parameters without reloading
+    const queryParams = new URLSearchParams({
+      page: newFilters.page.toString(),
+      sort_field: newFilters.sortField,
+      category: newFilters.filterCategory,
+      country: newFilters.filterCountry,
+      year: newFilters.filterYear,
+      type: newFilters.filterType,
+    }).toString();
+    setSearchParams(queryParams, { replace: true });
   };
 
   const toggleFilters = (): void => {
@@ -135,31 +102,9 @@ const Search: React.FC = () => {
     filters.sortField ||
       filters.filterCategory ||
       filters.filterCountry ||
-      filters.filterYear
+      filters.filterYear ||
+      filters.filterType // Include filterType in active filters check
   );
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64 bg-gray-900 rounded-lg">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-        <span className="text-white ml-3 text-lg font-medium">Đang tải...</span>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="bg-red-900/20 border border-red-500/50 rounded-xl p-6 text-red-200 mx-4">
-        <div className="flex items-center">
-          <div className="text-red-400 mr-3 text-xl">⚠️</div>
-          <div>
-            <h3 className="font-semibold text-lg">Có lỗi xảy ra</h3>
-            <p className="text-red-300 mt-1">Lỗi: {(error as Error).message}</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-6">
@@ -170,11 +115,11 @@ const Search: React.FC = () => {
             {/* Title and Mobile Toggle */}
             <div className="flex items-center justify-between p-6 pb-4">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl shadow-lg">
-                  <MdFilterList className="text-white text-2xl" />
+                <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg">
+                  <MdFilterList className="text-white text-xl" />
                 </div>
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  <h2 className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
                     Lọc Phim Hoạt Hình
                   </h2>
                   <p className="text-gray-400 text-sm mt-1">
@@ -186,11 +131,11 @@ const Search: React.FC = () => {
               {/* Mobile Filter Toggle */}
               <button
                 onClick={toggleFilters}
-                className="lg:hidden p-3 rounded-xl bg-gray-700 hover:bg-gray-600 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="lg:hidden p-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all duration-200 shadow-md hover:shadow-lg"
                 aria-label="Toggle filters"
               >
                 <MdFilterList
-                  className={`text-white text-xl transform transition-transform duration-200 ${
+                  className={`text-white text-lg transform transition-transform duration-200 ${
                     isFilterExpanded ? "rotate-180" : ""
                   }`}
                 />
@@ -206,12 +151,12 @@ const Search: React.FC = () => {
               } lg:block`}
             >
               {/* Filter Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-6">
                 {/* Sort Field */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <label
                     htmlFor="sortField"
-                    className="text-sm font-semibold text-gray-300 block uppercase tracking-wide"
+                    className="text-xs font-semibold text-gray-300 block uppercase tracking-wide"
                   >
                     Sắp xếp theo
                   </label>
@@ -220,11 +165,11 @@ const Search: React.FC = () => {
                     name="sortField"
                     value={filters.sortField}
                     onChange={handleFilterChange}
-                    className="w-full px-4 py-3 bg-gray-700/90 text-white rounded-xl border border-gray-600/50 
+                    className="w-full px-3 py-2 bg-gray-700/90 text-white rounded-lg border border-gray-600/50 
                              focus:border-blue-500 focus:ring-2 focus:ring-blue-500/25 transition-all duration-200
                              hover:bg-gray-700 hover:border-gray-500 cursor-pointer backdrop-blur-sm
-                             appearance-none bg-no-repeat bg-right bg-[length:16px_16px] 
-                             shadow-lg hover:shadow-xl font-medium"
+                             appearance-none bg-no-repeat bg-right bg-[length:14px_14px] 
+                             shadow-md hover:shadow-lg font-medium text-sm"
                   >
                     <option value="">Thời gian cập nhật</option>
                     <option value="created.time">Thời gian đăng</option>
@@ -233,10 +178,10 @@ const Search: React.FC = () => {
                 </div>
 
                 {/* Category Filter */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <label
                     htmlFor="filterCategory"
-                    className="text-sm font-semibold text-gray-300 block uppercase tracking-wide"
+                    className="text-xs font-semibold text-gray-300 block uppercase tracking-wide"
                   >
                     Thể loại
                   </label>
@@ -245,10 +190,10 @@ const Search: React.FC = () => {
                     name="filterCategory"
                     value={filters.filterCategory}
                     onChange={handleFilterChange}
-                    className="w-full px-4 py-3 bg-gray-700/90 text-white rounded-xl border border-gray-600/50 
+                    className="w-full px-3 py-2 bg-gray-700/90 text-white rounded-lg border border-gray-600/50 
                              focus:border-blue-500 focus:ring-2 focus:ring-blue-500/25 transition-all duration-200
                              hover:bg-gray-700 hover:border-gray-500 cursor-pointer backdrop-blur-sm
-                             shadow-lg hover:shadow-xl font-medium"
+                             shadow-md hover:shadow-lg font-medium text-sm"
                   >
                     <option value="">Toàn bộ thể loại</option>
                     <option value="hanh-dong">Hành Động</option>
@@ -277,10 +222,10 @@ const Search: React.FC = () => {
                 </div>
 
                 {/* Country Filter */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <label
                     htmlFor="filterCountry"
-                    className="text-sm font-semibold text-gray-300 block uppercase tracking-wide"
+                    className="text-xs font-semibold text-gray-300 block uppercase tracking-wide"
                   >
                     Quốc gia
                   </label>
@@ -289,10 +234,10 @@ const Search: React.FC = () => {
                     name="filterCountry"
                     value={filters.filterCountry}
                     onChange={handleFilterChange}
-                    className="w-full px-4 py-3 bg-gray-700/90 text-white rounded-xl border border-gray-600/50 
+                    className="w-full px-3 py-2 bg-gray-700/90 text-white rounded-lg border border-gray-600/50 
                              focus:border-blue-500 focus:ring-2 focus:ring-blue-500/25 transition-all duration-200
                              hover:bg-gray-700 hover:border-gray-500 cursor-pointer backdrop-blur-sm
-                             shadow-lg hover:shadow-xl font-medium"
+                             shadow-md hover:shadow-lg font-medium text-sm"
                   >
                     <option value="">Toàn bộ Quốc gia</option>
                     <option value="trung-quoc">Trung Quốc</option>
@@ -333,10 +278,10 @@ const Search: React.FC = () => {
                 </div>
 
                 {/* Year Filter */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <label
                     htmlFor="filterYear"
-                    className="text-sm font-semibold text-gray-300 block uppercase tracking-wide"
+                    className="text-xs font-semibold text-gray-300 block uppercase tracking-wide"
                   >
                     Năm sản xuất
                   </label>
@@ -345,10 +290,10 @@ const Search: React.FC = () => {
                     name="filterYear"
                     value={filters.filterYear}
                     onChange={handleFilterChange}
-                    className="w-full px-4 py-3 bg-gray-700/90 text-white rounded-xl border border-gray-600/50 
+                    className="w-full px-3 py-2 bg-gray-700/90 text-white rounded-lg border border-gray-600/50 
                              focus:border-blue-500 focus:ring-2 focus:ring-blue-500/25 transition-all duration-200
                              hover:bg-gray-700 hover:border-gray-500 cursor-pointer backdrop-blur-sm
-                             shadow-lg hover:shadow-xl font-medium"
+                             shadow-md hover:shadow-lg font-medium text-sm"
                   >
                     <option value="">Toàn bộ Năm</option>
                     {Array.from({ length: 26 }, (_, i) => 2025 - i).map(
@@ -361,41 +306,76 @@ const Search: React.FC = () => {
                     <option value="before-2000">Trước 2000</option>
                   </select>
                 </div>
+
+                {/* Movie Type Filter */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="filterType"
+                    className="text-xs font-semibold text-gray-300 block uppercase tracking-wide"
+                  >
+                    Loại phim
+                  </label>
+                  <select
+                    id="filterType"
+                    name="filterType"
+                    value={filters.filterType}
+                    onChange={handleFilterChange}
+                    className="w-full px-3 py-2 bg-white text-black rounded-lg border border-gray-300 
+                             focus:border-blue-500 focus:ring-2 focus:ring-blue-500/25 transition-all duration-200
+                             hover:bg-gray-100 cursor-pointer shadow-sm text-sm"
+                  >
+                    <option value="">- Tất cả -</option>
+                    <option value="phim-le">Phim Lẻ</option>
+                    <option value="phim-moi">Phim Mới</option>
+                    <option value="phim-bo">Phim Bộ</option>
+                    <option value="tv-shows">TV Shows</option>
+                    <option value="hoat-hinh">Hoạt Hình</option>
+                    <option value="phim-vietsub">Phim Vietsub</option>
+                    <option value="phim-thuyet-minh">Phim Thuyết Minh</option>
+                    <option value="phim-long-tieng">Phim Lồng Tiếng</option>
+                    <option value="phim-bo-dang-chieu">
+                      Phim Bộ Đang Chiếu
+                    </option>
+                    <option value="phim-tron-bo">Phim Trọn Bộ</option>
+                    <option value="phim-sap-chieu">Phim Sắp Chiếu</option>
+                    <option value="subteam">Subteam</option>
+                  </select>
+                </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between pt-6 border-t border-gray-700/50">
-                <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between pt-4 border-t border-gray-700/50">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={handleSearch}
-                    className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 
-                             text-white font-bold rounded-xl shadow-lg hover:shadow-2xl 
+                    className="group relative px-6 py-2.5 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 
+                             text-white font-semibold rounded-lg shadow-md hover:shadow-lg 
                              transform hover:scale-105 active:scale-95 transition-all duration-200 
-                             flex items-center justify-center gap-3 min-w-[160px]
+                             flex items-center justify-center gap-2 min-w-[130px]
                              before:absolute before:inset-0 before:bg-gradient-to-r before:from-blue-700 before:via-purple-700 before:to-blue-700
-                             before:rounded-xl before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-200 before:-z-10"
+                             before:rounded-lg before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-200 before:-z-10"
                   >
-                    <MdSearch className="text-xl group-hover:rotate-12 transition-transform duration-200" />
-                    <span className="text-lg">Tìm Kiếm</span>
+                    <MdSearch className="text-lg group-hover:rotate-12 transition-transform duration-200" />
+                    <span className="text-sm">Tìm Kiếm</span>
                   </button>
 
                   {hasActiveFilters && (
                     <button
                       onClick={clearFilters}
-                      className="group px-6 py-4 bg-gray-600/80 hover:bg-gray-600 text-white font-semibold 
-                               rounded-xl transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95
-                               flex items-center justify-center gap-2 min-w-[140px]"
+                      className="group px-5 py-2.5 bg-gray-600/80 hover:bg-gray-600 text-white font-semibold 
+                               rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105 active:scale-95
+                               flex items-center justify-center gap-2 min-w-[120px]"
                     >
-                      <MdClear className="text-lg group-hover:rotate-180 transition-transform duration-200" />
-                      <span>Xóa Bộ Lọc</span>
+                      <MdClear className="text-base group-hover:rotate-180 transition-transform duration-200" />
+                      <span className="text-sm">Xóa Bộ Lọc</span>
                     </button>
                   )}
                 </div>
 
                 {/* Active Filters Indicator */}
                 {hasActiveFilters && (
-                  <div className="flex items-center gap-3 text-sm text-gray-300 bg-gray-700/50 rounded-lg px-4 py-2">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                  <div className="flex items-center gap-2 text-xs text-gray-300 bg-gray-700/50 rounded-md px-3 py-1.5">
+                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></div>
                     <span className="font-medium">Đang áp dụng bộ lọc</span>
                   </div>
                 )}
