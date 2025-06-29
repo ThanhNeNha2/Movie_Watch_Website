@@ -91,3 +91,11 @@ yarn dev
 ### Page film
 
 ![alt text](./ImageUI/screencapture-movie-watch-website2-vercel-app-play-phu-thuy-maebashi-2025-06-29-21_37_25.png)
+
+### Page Search By Name
+
+![alt text](./ImageUI/screencapture-movie-watch-website2-vercel-app-SearchName-2025-06-29-21_44_19.png)
+
+### Page Search By Key
+
+![alt text](./ImageUI/screencapture-movie-watch-website2-vercel-app-ListMoveSearch-2025-06-29-21_51_51.png)
